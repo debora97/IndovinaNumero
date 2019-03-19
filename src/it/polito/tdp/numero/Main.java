@@ -1,5 +1,6 @@
 package it.polito.tdp.numero;
 	
+import it.polito.tdp.numero.model.NumeroModel;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -11,7 +12,15 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Numero.fxml"));
+			//dobbiamo fare qusta modifica rispetto al codice che ci da eclipse 
+			NumeroModel model = new NumeroModel();
+			FXMLLoader loader = new FXMLLoader();// ci permette di creare una scena automaticamente tramite SceneBuilder
+			
+		    
+			BorderPane root = (BorderPane)loader.load(getClass().getResource("Numero.fxml"));
+			NumeroController controller =loader.getController();
+			controller.setModel(model);
+			
 			Scene scene = new Scene(root);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
